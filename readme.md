@@ -45,3 +45,5 @@ This is a Content based Movie Recommender System App. Dataset taken from Kaggle 
 └── .gitignore
 
 ```
+
+A special thanks to Nitish Singh Sir (CampusX YouTube) for the concept of this project.
