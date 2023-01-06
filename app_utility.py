@@ -32,6 +32,10 @@ def recommendation_for(selected_movie):
         movie_posters.append(fetch_poster(moviesdf.iloc[movie_id].id))
     return recommended_movies, movie_posters
 
+def fetch_moviedetails(movie_id):
+    responsedata = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}').json()
+    return responsedata
+
 def nav_page(page_name, timeout_secs=3):
     nav_script = """
         <script type="text/javascript">

@@ -1,8 +1,4 @@
-# import streamlit as st
-# import pandas as pd
-# import pickle
-# import requests
-# from streamlit.components.v1 import html
+import datetime
 from app_utility import *
 
 
@@ -25,9 +21,23 @@ selected_movieid = moviesdf.iloc[moviesdf[ moviesdf['title']==selected_movie ].i
 # print(selected_movie, selected_movieid)
 
 st.write('You Choosed:', selected_movie)
-# col0, coll = st.columns(2)
-# with col0:
-st.image(fetch_poster(selected_movieid), width=130)
+col0, col1, col2, col3 = st.columns(4)
+with col0:
+    st.image(fetch_poster(selected_movieid), width=130)
+with col2:
+    moviedetails = fetch_moviedetails(selected_movieid)
+    user_score = int(moviedetails['vote_average'] * 10)
+    y, m, d = moviedetails['release_date'].split("-")
+    ymd = datetime.datetime(int(y), int(m), int(d))
+    # fmtdate = ymd.strftime()
+
+    st.markdown(f"**{selected_movie}**")
+    st.caption(f"{ymd.strftime('%b')} {ymd.strftime('%d')}, {ymd.strftime('%Y')}")
+    if user_score < 50:
+        st.markdown(f"**User Score : :red[{user_score} %]**")
+    else:
+        st.markdown(f"**User Score : :green[{user_score} %]**")
+
 
 #recommendbutton
 if st.button('Select & Generate'):
