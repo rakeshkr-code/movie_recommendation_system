@@ -46,4 +46,7 @@ This is a Content based Movie Recommender System App. Dataset taken from Kaggle 
 
 ```
 
-A special thanks to Nitish Singh Sir (CampusX YouTube) for the concept of this project.
+### A Special Thanks to
+
+- A special thanks to **Nitish Singh Sir** (CampusX YouTube) **for the concept of this project**. [reference](https://www.youtube.com/watch?v=SQHfry4xmdM&list=PLMlmzH-PRVD1zWbR_a1Tf88Wu_q8piscQ&index=13&t=319s)
+- Thanks to **Abraham Sanders** for giving a **solution for streamlit issue #4832**, which helped me a lot [reference](https://github.com/streamlit/streamlit/issues/4832)

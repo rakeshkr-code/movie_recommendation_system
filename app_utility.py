@@ -2,16 +2,15 @@ import streamlit as st
 import pandas as pd
 import pickle
 import requests
-import os
+from streamlit.components.v1 import html
 
 API_KEY = '8d6a6e382c1cf4ed59d16b3a99ff2658'
-# basedir = os.path.abspath(os.path.dirname(__file__))
-# MOVIESDICT_PATH = os.path.join(basedir, "../model")
 
 ### DUMP FILES OF OUR MODEL
 ### -----------------------
 moviesdf = pd.DataFrame(pickle.load(open('model/moviesdict.pkl', 'rb')))
 similarity_matrix = pickle.load(open('model/simimat.pkl', 'rb'))
+
 
 ### USEFUL FUNCTIONS
 ### -----------------
@@ -33,43 +32,27 @@ def recommendation_for(selected_movie):
         movie_posters.append(fetch_poster(moviesdf.iloc[movie_id].id))
     return recommended_movies, movie_posters
 
-
-### STREAMLIT APP STARTED............
-###----------------------------------
-
-# TITLE
-st.title("Movie Recommender App")
-
-# MOVIE SELECT BOX
-selected_movie = st.selectbox(
-    'Which Movie Would You Like To Watch?',
-    moviesdf['title'].values)
-
-# SHOW SELECTED MOVIE
-st.write('You selected:', selected_movie)
-
-# SHOW RECOMMENDED MOVIES
-if st.button('Recommend'):
-    st.write('Here are the recommendations for you : ')
-    movienames, posters = recommendation_for(selected_movie)
-
-    col1, col2, col3, col4, col5 = st.columns(5)
-    with col1:
-       st.caption(movienames[0])
-       st.image(posters[0])
-
-    with col2:
-       st.caption(movienames[1])
-       st.image(posters[1])
-
-    with col3:
-       st.caption(movienames[2])
-       st.image(posters[2])
-    
-    with col4:
-       st.caption(movienames[3])
-       st.image(posters[3])
-
-    with col5:
-       st.caption(movienames[4])
-       st.image(posters[4])
+def nav_page(page_name, timeout_secs=3):
+    nav_script = """
+        <script type="text/javascript">
+            function attempt_nav_page(page_name, start_time, timeout_secs) {
+                var links = window.parent.document.getElementsByTagName("a");
+                for (var i = 0; i < links.length; i++) {
+                    if (links[i].href.toLowerCase().endsWith("/" + page_name.toLowerCase())) {
+                        links[i].click();
+                        return;
+                    }
+                }
+                var elasped = new Date() - start_time;
+                if (elasped < timeout_secs * 1000) {
+                    setTimeout(attempt_nav_page, 100, page_name, start_time, timeout_secs);
+                } else {
+                    alert("Unable to navigate to page '" + page_name + "' after " + timeout_secs + " second(s).");
+                }
+            }
+            window.addEventListener("load", function() {
+                attempt_nav_page("%s", new Date(), %d);
+            });
+        </script>
+    """ % (page_name, timeout_secs)
+    html(nav_script)
