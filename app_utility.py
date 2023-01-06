@@ -16,7 +16,7 @@ similarity_matrix = pickle.load(open('model/simimat.pkl', 'rb'))
 ### -----------------
 def fetch_poster(movie_id):
     responsedata = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}').json()
-    completeposterpath = "https://image.tmdb.org/t/p/w500/" + responsedata['poster_path']
+    completeposterpath = f"https://image.tmdb.org/t/p/w500/{responsedata['poster_path']}"
     return completeposterpath
 
 def recommendation_for(selected_movie):
