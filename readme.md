@@ -55,3 +55,4 @@ This is a Content based Movie Recommender System App. Dataset taken from Kaggle 
 
 - A special thanks to **Nitish Singh Sir** (CampusX YouTube) **for the concept of this project**. [reference](https://www.youtube.com/watch?v=SQHfry4xmdM&list=PLMlmzH-PRVD1zWbR_a1Tf88Wu_q8piscQ&index=13&t=319s)
 - Thanks to **Abraham Sanders** for giving a **solution for streamlit issue #4832**, which helped me a lot [reference](https://github.com/streamlit/streamlit/issues/4832)
+- Thanks to **Emma Grimaldi** Medium Article, which helped me clarifying mathematical concepts [reference](https://towardsdatascience.com/how-to-build-from-scratch-a-content-based-movie-recommender-with-natural-language-processing-25ad400eb243)
